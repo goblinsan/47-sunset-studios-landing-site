@@ -1,10 +1,12 @@
 @import 'tailwindcss';
 
+/* ── Base CSS variables ─────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #09090b;
+  --foreground: #fafafa;
 }
 
+/* ── Tailwind theme — inline aliases (dynamic / font references) ─────────── */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -12,15 +14,142 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ── Tailwind theme — brand design tokens ───────────────────────────────── */
+@theme {
+  /* Surfaces */
+  --color-surface-0: #09090b;
+  --color-surface-1: #111113;
+  --color-surface-2: #18181b;
+  --color-surface-3: #27272a;
+
+  /* Borders */
+  --color-border-subtle: #1f1f23;
+  --color-border-default: #3f3f46;
+  --color-border-strong: #71717a;
+
+  /* Text */
+  --color-text-primary: #fafafa;
+  --color-text-secondary: #a1a1aa;
+  --color-text-subtle: #71717a;
+  --color-text-inverse: #09090b;
+
+  /* Sunset accent scale */
+  --color-sunset-50: #fff7ed;
+  --color-sunset-100: #ffedd5;
+  --color-sunset-200: #fed7aa;
+  --color-sunset-300: #fdba74;
+  --color-sunset-400: #fb923c;
+  --color-sunset-500: #f97316;
+  --color-sunset-600: #ea580c;
+  --color-sunset-700: #c2410c;
+  --color-sunset-800: #9a3412;
+  --color-sunset-900: #7c2d12;
+  --color-sunset-950: #431407;
+
+  /* Semantic accent shortcuts */
+  --color-accent: #f97316;
+  --color-accent-bright: #fb923c;
+  --color-accent-dim: #ea580c;
+
+  /* Typography scale */
+  --text-eyebrow: 0.6875rem;
+  --text-eyebrow--line-height: 1rem;
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1rem;
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.5rem;
+  --text-body: 1rem;
+  --text-body--line-height: 1.75rem;
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.875rem;
+  --text-subheading: 1.25rem;
+  --text-subheading--line-height: 1.75rem;
+  --text-heading-sm: 1.5rem;
+  --text-heading-sm--line-height: 2rem;
+  --text-heading: 2rem;
+  --text-heading--line-height: 2.5rem;
+  --text-heading-lg: 2.5rem;
+  --text-heading-lg--line-height: 3rem;
+  --text-heading-xl: 3rem;
+  --text-heading-xl--line-height: 3.5rem;
+  --text-display: 3.75rem;
+  --text-display--line-height: 1.1;
+  --text-display-lg: 4.5rem;
+  --text-display-lg--line-height: 1.05;
+
+  /* Spacing */
+  --spacing-section: 5rem;
+  --spacing-section-lg: 8rem;
+
+  /* Animation durations */
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
+
+  /* Animations */
+  --animate-fade-in: fade-in var(--duration-slower) ease-out both;
+  --animate-fade-up: fade-up var(--duration-slower) ease-out both;
+  --animate-fade-down: fade-down var(--duration-slow) ease-out both;
+  --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
+}
+
+/* ── Motion keyframes ───────────────────────────────────────────────────── */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+/* ── Base styles ────────────────────────────────────────────────────────── */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans, Arial, Helvetica, sans-serif);
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
