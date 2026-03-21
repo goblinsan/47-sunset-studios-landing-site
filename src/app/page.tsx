@@ -1,22 +1,46 @@
 import { ContentArea, PageContainer, Section } from '@/components/layout';
 import { Button, CalloutCard, Typography } from '@/components/ui';
 
-const services = [
+const capabilities = [
   {
-    eyebrow: 'Strategy',
-    title: 'Systems thinking first',
-    body: 'We map your operating context before touching a single line of code. Every engagement starts with clarity.',
+    eyebrow: 'Software Engineering',
+    title: 'Systems that scale',
+    body: 'Full-stack development, API design, and cloud-native infrastructure built for longevity and performance.',
   },
   {
-    eyebrow: 'Engineering',
-    title: 'Built to last in the dark',
-    body: 'Performant, maintainable, and deployed to edge infrastructure. No shortcuts, no vendor lock-in.',
+    eyebrow: 'Product Design',
+    title: 'Interfaces worth using',
+    body: 'UI/UX design, design systems, and interaction design rooted in clarity, intent, and human behaviour.',
     glow: true,
   },
   {
-    eyebrow: 'Growth',
-    title: 'Measured, then scaled',
-    body: 'We instrument what matters and scale what works. Data as a first-class citizen from day one.',
+    eyebrow: 'Digital Products',
+    title: 'From concept to launch',
+    body: 'End-to-end product development — strategy, prototyping, engineering, and continuous iteration.',
+  },
+  {
+    eyebrow: 'Creative Technology',
+    title: 'Ideas made tangible',
+    body: 'Experimental and immersive digital experiences that push the boundaries of what the medium can do.',
+  },
+];
+
+const workItems = [
+  {
+    eyebrow: 'Case study · Coming soon',
+    title: 'Platform modernisation',
+    body: 'Migrating a legacy monolith to a distributed, event-driven architecture — without stopping the business.',
+  },
+  {
+    eyebrow: 'Case study · Coming soon',
+    title: 'Consumer design system',
+    body: 'Building a component library and design language used consistently across three product lines.',
+    glow: true,
+  },
+  {
+    eyebrow: 'Case study · Coming soon',
+    title: 'Zero to launch in 60 days',
+    body: 'Taking a validated concept from nothing to a production-grade product in under two months.',
   },
 ];
 
@@ -24,7 +48,7 @@ export default function Home() {
   return (
     <PageContainer>
       {/* ── Hero ──────────────────────────────────────────────────────── */}
-      <Section className="py-section-lg flex min-h-screen flex-col items-center justify-center text-center">
+      <Section className="py-section-lg relative flex min-h-screen flex-col items-center justify-center text-center">
         <ContentArea size="md" className="animate-fade-up">
           <Typography variant="eyebrow" className="mb-6 block">
             Digital solutions studio
@@ -43,7 +67,7 @@ export default function Home() {
               Start a project
             </Button>
             <Button variant="secondary" size="lg">
-              Learn more
+              See our work
             </Button>
           </div>
         </ContentArea>
@@ -60,8 +84,33 @@ export default function Home() {
       {/* Divider */}
       <div className="via-border-default mx-auto h-px w-full max-w-6xl bg-gradient-to-r from-transparent to-transparent" />
 
-      {/* ── Services ──────────────────────────────────────────────────── */}
-      <Section id="services" animate className="py-section-lg">
+      {/* ── Overview ──────────────────────────────────────────────────── */}
+      <Section id="about" animate className="py-section-lg">
+        <ContentArea size="md" className="text-center">
+          <Typography variant="eyebrow" className="mb-4 block">
+            Who we are
+          </Typography>
+          <Typography variant="heading-lg" as="h2" className="mb-6">
+            A studio that builds what matters
+          </Typography>
+          <Typography variant="body-lg" className="mb-4">
+            47 Sunset Studios is a digital solutions studio operating at the intersection of
+            software engineering, product design, and creative technology. We work across
+            disciplines to solve problems that don&apos;t fit neatly into a single category.
+          </Typography>
+          <Typography variant="body">
+            Whether it&apos;s a web application, a digital product, a design system, or something
+            that hasn&apos;t been named yet — we bring the same rigour, taste, and care to every
+            engagement.
+          </Typography>
+        </ContentArea>
+      </Section>
+
+      {/* Divider */}
+      <div className="via-border-default mx-auto h-px w-full max-w-6xl bg-gradient-to-r from-transparent to-transparent" />
+
+      {/* ── Capabilities ──────────────────────────────────────────────── */}
+      <Section id="capabilities" animate className="py-section-lg">
         <ContentArea>
           <div className="mb-12 text-center">
             <Typography variant="eyebrow" className="mb-4 block">
@@ -72,8 +121,39 @@ export default function Home() {
             </Typography>
           </div>
 
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {capabilities.map(({ eyebrow, title, body, glow }) => (
+              <CalloutCard key={title} glow={glow}>
+                <Typography variant="eyebrow" className="mb-3 block">
+                  {eyebrow}
+                </Typography>
+                <Typography variant="heading-sm" as="h3" className="mb-3">
+                  {title}
+                </Typography>
+                <Typography variant="body-sm">{body}</Typography>
+              </CalloutCard>
+            ))}
+          </div>
+        </ContentArea>
+      </Section>
+
+      {/* Divider */}
+      <div className="via-border-default mx-auto h-px w-full max-w-6xl bg-gradient-to-r from-transparent to-transparent" />
+
+      {/* ── Work ──────────────────────────────────────────────────────── */}
+      <Section id="work" animate className="py-section-lg">
+        <ContentArea>
+          <div className="mb-12 text-center">
+            <Typography variant="eyebrow" className="mb-4 block">
+              Selected work
+            </Typography>
+            <Typography variant="heading" as="h2">
+              Proof in the build
+            </Typography>
+          </div>
+
           <div className="grid gap-6 md:grid-cols-3">
-            {services.map(({ eyebrow, title, body, glow }) => (
+            {workItems.map(({ eyebrow, title, body, glow }) => (
               <CalloutCard key={title} glow={glow}>
                 <Typography variant="eyebrow" className="mb-3 block">
                   {eyebrow}
@@ -110,10 +190,65 @@ export default function Home() {
       </Section>
 
       {/* ── Footer ────────────────────────────────────────────────────── */}
-      <footer className="border-border-subtle border-t px-6 py-8 text-center">
-        <Typography variant="caption">
-          © {new Date().getFullYear()} 47 Sunset Studios. All rights reserved.
-        </Typography>
+      <footer className="border-border-subtle border-t px-6 py-12">
+        <ContentArea>
+          <div className="flex flex-col items-center gap-8 md:flex-row md:justify-between">
+            {/* Brand */}
+            <div>
+              <Typography variant="heading-sm" as="p" className="mb-1">
+                47 Sunset Studios
+              </Typography>
+              <Typography variant="caption">Digital solutions forged in the dark.</Typography>
+            </div>
+
+            {/* Social links — hrefs are placeholders until real profiles exist */}
+            <nav aria-label="Social media links">
+              <ul className="flex items-center gap-6">
+                {[
+                  { label: 'X', ariaLabel: 'X (formerly Twitter)', href: '#' },
+                  { label: 'GitHub', ariaLabel: 'GitHub', href: '#' },
+                  { label: 'LinkedIn', ariaLabel: 'LinkedIn', href: '#' },
+                ].map(({ label, ariaLabel, href }) => (
+                  <li key={label}>
+                    <a
+                      href={href}
+                      aria-label={ariaLabel}
+                      className="text-text-subtle text-body-sm duration-base hover:text-text-primary transition-colors"
+                    >
+                      {label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            {/* Legal links */}
+            <nav aria-label="Legal links">
+              <ul className="flex items-center gap-4">
+                {[
+                  { label: 'Privacy Policy', href: '/privacy' },
+                  { label: 'Terms', href: '/terms' },
+                ].map(({ label, href }) => (
+                  <li key={label}>
+                    <a
+                      href={href}
+                      className="text-text-subtle text-caption duration-base hover:text-text-primary transition-colors"
+                    >
+                      {label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+
+          {/* Copyright */}
+          <div className="border-border-subtle mt-8 border-t pt-8 text-center">
+            <Typography variant="caption">
+              © {new Date().getFullYear()} 47 Sunset Studios. All rights reserved.
+            </Typography>
+          </div>
+        </ContentArea>
       </footer>
     </PageContainer>
   );
