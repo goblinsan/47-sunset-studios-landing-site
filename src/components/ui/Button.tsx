@@ -3,10 +3,26 @@ import { cn } from '@/lib/utils';
 type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+type SharedProps = {
   variant?: ButtonVariant;
   size?: ButtonSize;
-}
+  className?: string;
+  children: React.ReactNode;
+};
+
+/** Renders as `<a>` when `href` is provided; accepts all anchor attributes. */
+type ButtonAsAnchor = SharedProps & { href: string } & Omit<
+    React.AnchorHTMLAttributes<HTMLAnchorElement>,
+    keyof SharedProps
+  >;
+
+/** Renders as `<button>` when `href` is absent; accepts all button attributes. */
+type ButtonAsButton = SharedProps & { href?: never } & Omit<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    keyof SharedProps
+  >;
+
+type ButtonProps = ButtonAsAnchor | ButtonAsButton;
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary: [
@@ -35,11 +51,14 @@ const sizeStyles: Record<ButtonSize, string> = {
 
 /**
  * Reusable button with three style variants and three sizes.
+ * Pass `href` to render a styled anchor (`<a>`) instead of `<button>`,
+ * which also enables anchor-specific props such as `target` and `rel`.
  *
  * @example
  * <Button variant="primary" size="lg">Get started</Button>
  * <Button variant="secondary">Learn more</Button>
  * <Button variant="ghost" size="sm">Dismiss</Button>
+ * <Button href="/contact" variant="primary">Contact us</Button>
  */
 export function Button({
   variant = 'primary',
@@ -48,18 +67,26 @@ export function Button({
   children,
   ...props
 }: ButtonProps) {
+  const classes = cn(
+    'inline-flex cursor-pointer items-center justify-center outline-none',
+    'focus-visible:ring-accent focus-visible:ring-offset-surface-0 focus-visible:ring-2 focus-visible:ring-offset-2',
+    'disabled:pointer-events-none disabled:opacity-40',
+    variantStyles[variant],
+    sizeStyles[size],
+    className,
+  );
+
+  if ('href' in props && props.href) {
+    const { href, ...anchorProps } = props as ButtonAsAnchor;
+    return (
+      <a href={href} className={classes} {...anchorProps}>
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <button
-      className={cn(
-        'inline-flex cursor-pointer items-center justify-center outline-none',
-        'focus-visible:ring-accent focus-visible:ring-offset-surface-0 focus-visible:ring-2 focus-visible:ring-offset-2',
-        'disabled:pointer-events-none disabled:opacity-40',
-        variantStyles[variant],
-        sizeStyles[size],
-        className,
-      )}
-      {...props}
-    >
+    <button className={classes} {...(props as ButtonAsButton)}>
       {children}
     </button>
   );

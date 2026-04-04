@@ -63,10 +63,10 @@ export default function Home() {
           </Typography>
 
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <Button variant="primary" size="lg">
+            <Button variant="primary" size="lg" href="#capabilities">
               Start a project
             </Button>
-            <Button variant="secondary" size="lg">
+            <Button variant="secondary" size="lg" href="#work">
               See our work
             </Button>
           </div>
@@ -77,7 +77,7 @@ export default function Home() {
           aria-hidden="true"
           className="animate-glow-pulse pointer-events-none absolute inset-0 -z-10 flex items-center justify-center"
         >
-          <div className="bg-accent/5 h-[600px] w-[600px] rounded-full blur-3xl" />
+          <div className="bg-accent/5 h-[300px] w-[300px] rounded-full blur-3xl sm:h-[600px] sm:w-[600px]" />
         </div>
       </Section>
 
@@ -172,25 +172,30 @@ export default function Home() {
       <div className="via-border-default mx-auto h-px w-full max-w-6xl bg-gradient-to-r from-transparent to-transparent" />
 
       {/* ── CTA ───────────────────────────────────────────────────────── */}
-      <Section animate className="py-section-lg text-center">
+      <Section
+        id="contact"
+        animate
+        className="py-section-lg text-center"
+        aria-labelledby="cta-heading"
+      >
         <ContentArea size="md">
           <Typography variant="eyebrow" className="mb-4 block">
             Ready?
           </Typography>
-          <Typography variant="heading-lg" as="h2" className="mb-4">
+          <Typography variant="heading-lg" as="h2" id="cta-heading" className="mb-4">
             Let&apos;s build something worth having
           </Typography>
           <Typography variant="body" className="mb-10">
             No pitch decks, no retainers. Just a conversation about what you&apos;re trying to do.
           </Typography>
-          <Button variant="primary" size="lg">
+          <Button variant="primary" size="lg" href="mailto:hello@47sunsetstudios.com">
             Get in touch
           </Button>
         </ContentArea>
       </Section>
 
       {/* ── Footer ────────────────────────────────────────────────────── */}
-      <footer className="border-border-subtle border-t px-6 py-12">
+      <footer className="border-border-subtle border-t px-4 py-12 sm:px-6">
         <ContentArea>
           <div className="flex flex-col items-center gap-8 md:flex-row md:justify-between">
             {/* Brand */}
@@ -213,7 +218,7 @@ export default function Home() {
                     <a
                       href={href}
                       aria-label={ariaLabel}
-                      className="text-text-subtle text-body-sm duration-base hover:text-text-primary transition-colors"
+                      className="text-text-subtle text-body-sm duration-base hover:text-text-primary focus-visible:ring-accent focus-visible:text-text-primary rounded-sm transition-colors outline-none focus-visible:ring-2"
                     >
                       {label}
                     </a>
@@ -232,7 +237,7 @@ export default function Home() {
                   <li key={label}>
                     <a
                       href={href}
-                      className="text-text-subtle text-caption duration-base hover:text-text-primary transition-colors"
+                      className="text-text-subtle text-caption duration-base hover:text-text-primary focus-visible:ring-accent focus-visible:text-text-primary rounded-sm transition-colors outline-none focus-visible:ring-2"
                     >
                       {label}
                     </a>

@@ -75,11 +75,14 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 │   ├── components/        # Shared React components
 │   └── lib/               # Utility helpers (e.g. cn())
 ├── public/                # Static assets
+│   └── robots.txt         # Crawler directives
 ├── .env.example           # Documented env var template
 ├── eslint.config.mjs      # ESLint flat config (Next.js + Prettier)
 ├── .prettierrc.json       # Prettier configuration
-├── next.config.ts         # Next.js configuration
+├── next.config.ts         # Next.js configuration (static export for Cloudflare)
 ├── postcss.config.mjs     # PostCSS / Tailwind CSS v4 configuration
+├── wrangler.toml          # Cloudflare Pages configuration
+├── LAUNCH_CHECKLIST.md    # Pre-launch verification checklist
 └── tsconfig.json          # TypeScript strict configuration
 ```
 
@@ -110,9 +113,12 @@ cp .env.example .env.local
 
 1. Push to the `main` branch.
 2. In the [Cloudflare Pages dashboard](https://pages.cloudflare.com/), create a new project pointing to this repository.
-3. Set the **build command** to `npm run build` and the **output directory** to `.next`.
-4. Add any required environment variables in the Cloudflare dashboard.
-5. Configure your custom domain and SSL/TLS settings.
+3. Set the **build command** to `npm run build` and the **output directory** to `out`.
+4. Set the **Node.js version** to `20` (or higher) in the Pages build settings.
+5. Add any required environment variables in the Cloudflare dashboard.
+6. Configure your custom domain and SSL/TLS settings.
+
+A `wrangler.toml` is included at the repository root with the Pages configuration pre-filled.
 
 Refer to the [Cloudflare Next.js guide](https://developers.cloudflare.com/pages/framework-guides/nextjs/) for detailed instructions.
 
