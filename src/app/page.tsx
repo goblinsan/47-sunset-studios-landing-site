@@ -59,11 +59,12 @@ export default function Home() {
           </Typography>
 
           <Typography variant="body-lg" className="mx-auto mb-10 max-w-prose">
-            We forge digital solutions in the dark — quietly, deliberately, and without the noise.
+            We build software, design products, and ship digital experiences for businesses and
+            founders who need things done right — precisely, considerately, and built to last.
           </Typography>
 
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <Button variant="primary" size="lg" href="#capabilities">
+            <Button variant="primary" size="lg" href="#contact">
               Start a project
             </Button>
             <Button variant="secondary" size="lg" href="#work">
@@ -91,17 +92,17 @@ export default function Home() {
             Who we are
           </Typography>
           <Typography variant="heading-lg" as="h2" className="mb-6">
-            A studio that builds what matters
+            A studio built for the hard problems
           </Typography>
           <Typography variant="body-lg" className="mb-4">
-            47 Sunset Studios is a digital solutions studio operating at the intersection of
-            software engineering, product design, and creative technology. We work across
-            disciplines to solve problems that don&apos;t fit neatly into a single category.
+            47 Sunset Studios is an independent digital solutions studio working at the intersection
+            of software engineering, product design, and creative technology. We take on work that
+            requires genuine craft — products built from the ground up, systems that need
+            rethinking, and experiences that need to earn attention.
           </Typography>
           <Typography variant="body">
-            Whether it&apos;s a web application, a digital product, a design system, or something
-            that hasn&apos;t been named yet — we bring the same rigour, taste, and care to every
-            engagement.
+            We keep our engagements tight and our communication direct. No sprawling account teams
+            or inflated timelines — just experienced people solving real problems.
           </Typography>
         </ContentArea>
       </Section>
@@ -134,6 +135,12 @@ export default function Home() {
               </CalloutCard>
             ))}
           </div>
+
+          <div className="mt-10 text-center">
+            <Button variant="secondary" size="md" href="#contact">
+              Work with us
+            </Button>
+          </div>
         </ContentArea>
       </Section>
 
@@ -165,32 +172,62 @@ export default function Home() {
               </CalloutCard>
             ))}
           </div>
+
+          <div className="mt-10 text-center">
+            <Button variant="secondary" size="md" href="#contact">
+              Discuss your project
+            </Button>
+          </div>
         </ContentArea>
       </Section>
 
       {/* Divider */}
       <div className="via-border-default mx-auto h-px w-full max-w-6xl bg-gradient-to-r from-transparent to-transparent" />
 
-      {/* ── CTA ───────────────────────────────────────────────────────── */}
+      {/* ── Contact ───────────────────────────────────────────────────── */}
       <Section
         id="contact"
         animate
         className="py-section-lg text-center"
-        aria-labelledby="cta-heading"
+        aria-labelledby="contact-heading"
       >
         <ContentArea size="md">
           <Typography variant="eyebrow" className="mb-4 block">
-            Ready?
+            Get in touch
           </Typography>
-          <Typography variant="heading-lg" as="h2" id="cta-heading" className="mb-4">
+          <Typography variant="heading-lg" as="h2" id="contact-heading" className="mb-4">
             Let&apos;s build something worth having
           </Typography>
-          <Typography variant="body" className="mb-10">
-            No pitch decks, no retainers. Just a conversation about what you&apos;re trying to do.
+          <Typography variant="body-lg" className="mb-4">
+            If you have a product idea, a technical challenge, or an engagement that doesn&apos;t
+            fit the usual brief — we&apos;d like to hear about it.
           </Typography>
-          <Button variant="primary" size="lg" href="mailto:hello@47sunsetstudios.com">
-            Get in touch
-          </Button>
+          <Typography variant="body" className="mb-10">
+            No pitch decks, no retainers. Just a direct conversation about what you&apos;re trying
+            to build.
+          </Typography>
+
+          {/* Email callout */}
+          <div className="border-border-subtle bg-surface-1 mb-10 rounded-xl border p-6">
+            <Typography variant="caption" className="mb-2 block">
+              Send us a note
+            </Typography>
+            <a
+              href="mailto:hello@47sunsetstudios.com"
+              className="text-accent hover:text-accent-bright focus-visible:ring-accent duration-base text-body-lg font-semibold transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            >
+              hello@47sunsetstudios.com
+            </a>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Button variant="primary" size="lg" href="mailto:hello@47sunsetstudios.com">
+              Send us a message
+            </Button>
+            <Button variant="secondary" size="lg" href="#work">
+              See our work first
+            </Button>
+          </div>
         </ContentArea>
       </Section>
 
