@@ -1,5 +1,5 @@
 import { ContentArea, PageContainer, Section } from '@/components/layout';
-import { Button, CalloutCard, Typography } from '@/components/ui';
+import { Button, CalloutCard, ContactForm, Typography } from '@/components/ui';
 
 const capabilities = [
   {
@@ -185,49 +185,36 @@ export default function Home() {
       <div className="via-border-default mx-auto h-px w-full max-w-6xl bg-gradient-to-r from-transparent to-transparent" />
 
       {/* ── Contact ───────────────────────────────────────────────────── */}
-      <Section
-        id="contact"
-        animate
-        className="py-section-lg text-center"
-        aria-labelledby="contact-heading"
-      >
+      <Section id="contact" animate aria-labelledby="contact-heading">
         <ContentArea size="md">
-          <Typography variant="eyebrow" className="mb-4 block">
-            Get in touch
-          </Typography>
-          <Typography variant="heading-lg" as="h2" id="contact-heading" className="mb-4">
-            Let&apos;s build something worth having
-          </Typography>
-          <Typography variant="body-lg" className="mb-4">
-            If you have a product idea, a technical challenge, or an engagement that doesn&apos;t
-            fit the usual brief — we&apos;d like to hear about it.
-          </Typography>
-          <Typography variant="body" className="mb-10">
-            No pitch decks, no retainers. Just a direct conversation about what you&apos;re trying
-            to build.
-          </Typography>
-
-          {/* Email callout */}
-          <div className="border-border-subtle bg-surface-1 mb-10 rounded-xl border p-6">
-            <Typography variant="caption" className="mb-2 block">
-              Send us a note
+          <div className="mb-10 text-center">
+            <Typography variant="eyebrow" className="mb-4 block">
+              Get in touch
             </Typography>
+            <Typography variant="heading-lg" as="h2" id="contact-heading" className="mb-4">
+              Let&apos;s build something worth having
+            </Typography>
+            <Typography variant="body-lg" className="mb-4">
+              If you have a product idea, a technical challenge, or an engagement that doesn&apos;t
+              fit the usual brief — we&apos;d like to hear about it.
+            </Typography>
+            <Typography variant="body">
+              No pitch decks, no retainers. Just a direct conversation about what you&apos;re trying
+              to build.
+            </Typography>
+          </div>
+
+          <ContactForm />
+
+          <p className="text-body-sm text-text-subtle mt-6 text-center">
+            Prefer email?{' '}
             <a
               href="mailto:hello@47sunsetstudios.com"
-              className="text-accent hover:text-accent-bright focus-visible:ring-accent duration-base text-body-lg font-semibold transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+              className="text-accent hover:text-accent-bright duration-base transition-colors outline-none"
             >
               hello@47sunsetstudios.com
             </a>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <Button variant="primary" size="lg" href="mailto:hello@47sunsetstudios.com">
-              Send us a message
-            </Button>
-            <Button variant="secondary" size="lg" href="#work">
-              See our work first
-            </Button>
-          </div>
+          </p>
         </ContentArea>
       </Section>
 

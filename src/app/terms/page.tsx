@@ -50,9 +50,7 @@ export default function TermsPage() {
                 This Site is provided for informational purposes only. You agree not to:
               </Typography>
               <ul className="text-text-secondary text-body ml-5 list-disc space-y-2">
-                <li>
-                  Use the Site in any way that violates applicable laws or regulations.
-                </li>
+                <li>Use the Site in any way that violates applicable laws or regulations.</li>
                 <li>
                   Attempt to gain unauthorised access to any part of the Site or its related
                   infrastructure.
@@ -61,9 +59,7 @@ export default function TermsPage() {
                   Reproduce, duplicate, or distribute any content from the Site without prior
                   written permission.
                 </li>
-                <li>
-                  Use automated means to scrape, crawl, or extract content from the Site.
-                </li>
+                <li>Use automated means to scrape, crawl, or extract content from the Site.</li>
               </ul>
             </div>
 
@@ -85,9 +81,9 @@ export default function TermsPage() {
               </Typography>
               <Typography variant="body">
                 The Site is provided on an &quot;as is&quot; and &quot;as available&quot; basis
-                without warranties of any kind, express or implied. We do not warrant that the
-                Site will be uninterrupted, error-free, or free of harmful components. Your use of
-                the Site is at your sole risk.
+                without warranties of any kind, express or implied. We do not warrant that the Site
+                will be uninterrupted, error-free, or free of harmful components. Your use of the
+                Site is at your sole risk.
               </Typography>
             </div>
 
@@ -97,9 +93,9 @@ export default function TermsPage() {
               </Typography>
               <Typography variant="body">
                 To the fullest extent permitted by law, 47 Sunset Studios shall not be liable for
-                any indirect, incidental, special, consequential, or punitive damages arising out
-                of your access to or use of — or inability to access or use — the Site or any
-                content on it.
+                any indirect, incidental, special, consequential, or punitive damages arising out of
+                your access to or use of — or inability to access or use — the Site or any content
+                on it.
               </Typography>
             </div>
 
@@ -146,10 +142,9 @@ export default function TermsPage() {
                 Changes to these terms
               </Typography>
               <Typography variant="body">
-                We reserve the right to modify these terms at any time. The &quot;last
-                updated&quot; date at the top of this page reflects the most recent revision.
-                Continued use of the Site after any changes constitutes your acceptance of the
-                updated terms.
+                We reserve the right to modify these terms at any time. The &quot;last updated&quot;
+                date at the top of this page reflects the most recent revision. Continued use of the
+                Site after any changes constitutes your acceptance of the updated terms.
               </Typography>
             </div>
           </div>
