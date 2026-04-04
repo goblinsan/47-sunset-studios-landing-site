@@ -24,13 +24,17 @@ interface TypographyProps {
   variant: TypographyVariant;
   children: React.ReactNode;
   className?: string;
+  /** Optional id for aria-labelledby associations. */
+  id?: string;
 }
 
 const variantStyles: Record<TypographyVariant, string> = {
-  'display-lg': 'text-display-lg font-bold tracking-tight text-text-primary',
-  display: 'text-display font-bold tracking-tight text-text-primary',
-  'heading-xl': 'text-heading-xl font-bold tracking-tight text-text-primary',
-  'heading-lg': 'text-heading-lg font-semibold tracking-tight text-text-primary',
+  'display-lg':
+    'text-heading-lg sm:text-heading-xl md:text-display-lg font-bold tracking-tight text-text-primary',
+  display:
+    'text-heading sm:text-heading-lg md:text-display font-bold tracking-tight text-text-primary',
+  'heading-xl': 'text-heading sm:text-heading-xl font-bold tracking-tight text-text-primary',
+  'heading-lg': 'text-heading sm:text-heading-lg font-semibold tracking-tight text-text-primary',
   heading: 'text-heading font-semibold tracking-tight text-text-primary',
   'heading-sm': 'text-heading-sm font-semibold tracking-tight text-text-primary',
   subheading: 'text-subheading font-medium text-text-secondary',
@@ -65,7 +69,11 @@ const defaultTag: Record<TypographyVariant, TypographyTag> = {
  * <Typography variant="heading" as="h2">What we do</Typography>
  * <Typography variant="body">We craft digital solutions…</Typography>
  */
-export function Typography({ as, variant, children, className }: TypographyProps) {
+export function Typography({ as, variant, children, className, id }: TypographyProps) {
   const Tag = (as ?? defaultTag[variant]) as TypographyTag;
-  return <Tag className={cn(variantStyles[variant], className)}>{children}</Tag>;
+  return (
+    <Tag id={id} className={cn(variantStyles[variant], className)}>
+      {children}
+    </Tag>
+  );
 }

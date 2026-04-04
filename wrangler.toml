@@ -1,0 +1,5 @@
+name = "47-sunset-studios-landing-site"
+compatibility_date = "2024-09-23"
+
+# Static assets are served from the `out/` directory produced by `next build`.
+pages_build_output_dir = "./out"
