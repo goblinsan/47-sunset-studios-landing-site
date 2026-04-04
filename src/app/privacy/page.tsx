@@ -51,8 +51,8 @@ export default function PrivacyPage() {
               </Typography>
               <ul className="text-text-secondary text-body ml-5 list-disc space-y-2">
                 <li>
-                  <strong className="text-text-primary font-semibold">Contact information</strong>{' '}
-                  — name and email address when you reach out to us directly via email.
+                  <strong className="text-text-primary font-semibold">Contact information</strong> —
+                  name and email address when you reach out to us directly via email.
                 </li>
                 <li>
                   <strong className="text-text-primary font-semibold">Usage data</strong> — basic
@@ -61,8 +61,8 @@ export default function PrivacyPage() {
                 </li>
                 <li>
                   <strong className="text-text-primary font-semibold">Technical data</strong> —
-                  browser type, device type, and IP address, retained only for as long as needed
-                  for security and diagnostic purposes.
+                  browser type, device type, and IP address, retained only for as long as needed for
+                  security and diagnostic purposes.
                 </li>
               </ul>
             </div>
@@ -101,9 +101,9 @@ export default function PrivacyPage() {
                 Data retention
               </Typography>
               <Typography variant="body">
-                Email correspondence is retained only for as long as necessary to fulfil the
-                purpose for which it was sent. You may request deletion of your contact details at
-                any time by emailing us.
+                Email correspondence is retained only for as long as necessary to fulfil the purpose
+                for which it was sent. You may request deletion of your contact details at any time
+                by emailing us.
               </Typography>
             </div>
 
