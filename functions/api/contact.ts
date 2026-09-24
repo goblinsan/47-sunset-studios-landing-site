@@ -73,6 +73,12 @@ export async function onRequestPost(context: { request: Request; env: Env }): Pr
     FROM_EMAIL = 'website@47sunsetstudios.com',
   } = context.env;
 
+  // Without an email key the message would go nowhere. Say so, rather than
+  // answering "sent" for a message nobody will ever read.
+  if (!RESEND_API_KEY) {
+    return jsonResponse({ error: `The contact form is not connected yet. Email ${CONTACT_EMAIL} instead.` }, 503);
+  }
+
   if (RESEND_API_KEY) {
     const emailRes = await fetch('https://api.resend.com/emails', {
       method: 'POST',

@@ -35,7 +35,8 @@ export default function TermsPage() {
                 Acceptance of terms
               </Typography>
               <Typography variant="body">
-                By accessing or using 47sunsetstudios.com (the &quot;Site&quot;), you agree to be
+                47sunsetstudios.com (the &quot;Site&quot;) is operated by 47 Sunset Studios LLC
+                (&quot;47 Sunset Studios&quot;). By accessing or using the Site, you agree to be
                 bound by these Terms of Use. If you do not agree to these terms, please do not use
                 the Site. These terms apply to all visitors and anyone who accesses or uses the
                 Site.

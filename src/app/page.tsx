@@ -274,7 +274,7 @@ export default function Home() {
           {/* Copyright */}
           <div className="border-border-subtle mt-8 border-t pt-8 text-center">
             <Typography variant="caption">
-              © {new Date().getFullYear()} 47 Sunset Studios. All rights reserved.
+              © {new Date().getFullYear()} 47 Sunset Studios LLC. All rights reserved.
             </Typography>
           </div>
         </ContentArea>

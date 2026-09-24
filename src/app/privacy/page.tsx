@@ -35,7 +35,7 @@ export default function PrivacyPage() {
                 Overview
               </Typography>
               <Typography variant="body">
-                47 Sunset Studios (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) respects your
+                47 Sunset Studios LLC (&quot;47 Sunset Studios&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) respects your
                 privacy. This policy explains what information we collect when you visit
                 47sunsetstudios.com and how we use it. We keep things simple: we collect only what
                 we need and we do not sell your data.
