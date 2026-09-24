@@ -109,7 +109,23 @@ cp .env.example .env.local
 
 ## Deployment
 
-### Cloudflare Pages (recommended)
+### How it is deployed now
+
+The live site (https://47sunsetstudios.com and www) is the Cloudflare Pages project
+`sunset-studios-site`, by **direct upload**, not connected to git: pushing does not
+deploy. To publish a change, build and upload:
+
+```bash
+npm run build
+npx wrangler@3 pages deploy out --project-name sunset-studios-site --branch main
+```
+
+`wrangler` needs `CLOUDFLARE_API_TOKEN` (with Cloudflare Pages: Edit) and
+`CLOUDFLARE_ACCOUNT_ID` in the environment. `functions/api/contact.ts` is deployed
+with the site; without `RESEND_API_KEY` set on the project it answers 503 and points
+to hello@47sunsetstudios.com, which Cloudflare Email Routing forwards.
+
+### Cloudflare Pages connected to git (alternative)
 
 1. Push to the `main` branch.
 2. In the [Cloudflare Pages dashboard](https://pages.cloudflare.com/), create a new project pointing to this repository.
