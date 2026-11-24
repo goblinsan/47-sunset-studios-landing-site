@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import { pixel } from '../_content/font';
-import { CURSEFORGE_URL, GUIDE, MIN_VERSION, TESTED } from '../_content/shared';
+import { CURSEFORGE_URL, GUIDE, MIN_VERSION, TESTED, YOUTUBE_URL } from '../_content/shared';
 
 /** The one thing to do on landing: get it. Sits beside the headline, above the trailer. */
 export function DownloadBlock() {
@@ -107,6 +107,11 @@ export function InstallStrip() {
           <a href={`${GUIDE}/install/`} className="text-accent-bright font-medium hover:underline">
             Xbox, Realms and servers →
           </a>
+          {YOUTUBE_URL && (
+            <a href={YOUTUBE_URL} className="text-accent-bright font-medium hover:underline">
+              Watch on YouTube →
+            </a>
+          )}
         </div>
       </div>
     </div>
