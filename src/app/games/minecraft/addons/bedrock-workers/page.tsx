@@ -4,19 +4,11 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ContentArea, PageContainer, Section } from '@/components/layout';
 import { Button, Typography } from '@/components/ui';
-import { InstallCard } from './_components/InstallCard';
+import { DownloadBlock, InstallStrip } from './_components/Download';
 import { Trailer } from './_components/Trailer';
 import { cn } from '@/lib/utils';
 import { pixel } from './_content/font';
-import {
-  ART,
-  BASE,
-  CURSEFORGE_URL,
-  FEEDBACK_EMAIL,
-  GUIDE,
-  GUIDES,
-  PROMISE,
-} from './_content/shared';
+import { ART, BASE, FEEDBACK_EMAIL, GUIDE, GUIDES, PROMISE } from './_content/shared';
 import { MERCHANTS, WORKERS } from './_content/workers';
 
 const SUMMARY =
@@ -184,41 +176,23 @@ export default function BedrockWorkersPage() {
       {/* ── Hero ──────────────────────────────────────────────────────── */}
       <Section className="relative overflow-hidden pt-6 sm:pt-8">
         <ContentArea>
-          <div className="animate-fade-up mb-8">
-            <Typography variant="eyebrow" className="mb-4 block">
-              Bedrock Workers · a Minecraft Bedrock add-on
-            </Typography>
-            <Typography variant="heading-xl" as="h1" className="mb-4 max-w-4xl">
-              {PROMISE}
-            </Typography>
-            <Typography variant="body-lg" className="max-w-prose">
-              Hire villagers to fish, farm, bake, build and guard. They put up their own houses, get
-              paid in bread, and head to the tavern for karaoke when the work is done.
-            </Typography>
+          <div className="animate-fade-up mb-8 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end lg:gap-12">
+            <div>
+              <Typography variant="eyebrow" className="mb-4 block">
+                Bedrock Workers · a Minecraft Bedrock add-on
+              </Typography>
+              <Typography variant="heading-xl" as="h1" className="mb-4 max-w-3xl">
+                {PROMISE}
+              </Typography>
+              <Typography variant="body-lg" className="max-w-prose">
+                Hire villagers to fish, farm, bake, build and guard. They put up their own houses,
+                get paid in bread, and head to the tavern for karaoke when the work is done.
+              </Typography>
+            </div>
+            <DownloadBlock />
           </div>
           <Trailer />
-          <div className="mt-8 grid gap-6 md:grid-cols-[1fr_1.15fr] md:items-start">
-            <div className="flex flex-col items-start gap-3">
-              {CURSEFORGE_URL ? (
-                <Button variant="primary" size="lg" href={CURSEFORGE_URL}>
-                  Download on CurseForge
-                </Button>
-              ) : (
-                <span className="border-accent/40 text-accent-bright text-body inline-flex h-12 items-center rounded-lg border px-5 font-medium">
-                  Coming soon to CurseForge
-                </span>
-              )}
-              <div className="flex flex-wrap gap-3">
-                <Button variant="secondary" size="md" href={`${GUIDE}/getting-started/`}>
-                  Getting started guide
-                </Button>
-                <Button variant="ghost" size="md" href="#feedback">
-                  Tell us what you think
-                </Button>
-              </div>
-            </div>
-            <InstallCard />
-          </div>
+          <InstallStrip />
         </ContentArea>
       </Section>
 
