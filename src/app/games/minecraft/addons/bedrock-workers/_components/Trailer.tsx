@@ -42,7 +42,7 @@ export function Trailer() {
             <svg aria-hidden="true" viewBox="0 0 24 24" className="h-6 w-6 fill-current">
               <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" />
             </svg>
-            Watch the 49-second trailer
+            Watch the trailer
           </span>
         </button>
       )}
