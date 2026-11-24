@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { ContentArea, PageContainer, Section } from '@/components/layout';
-import { Button, Typography } from '@/components/ui';
-import { BASE, GUIDE, GUIDES } from '../_content/shared';
+import { Typography } from '@/components/ui';
+import { GUIDE, GUIDES } from '../_content/shared';
 
 export const metadata: Metadata = {
   title: 'Bedrock Workers guides',
@@ -14,11 +14,6 @@ export default function GuidesIndex() {
     <PageContainer>
       <Section>
         <ContentArea size="lg">
-          <div className="mb-8">
-            <Button variant="ghost" size="sm" href={`${BASE}/`}>
-              ← Bedrock Workers
-            </Button>
-          </div>
           <Typography variant="eyebrow" className="mb-4 block">
             Bedrock Workers
           </Typography>

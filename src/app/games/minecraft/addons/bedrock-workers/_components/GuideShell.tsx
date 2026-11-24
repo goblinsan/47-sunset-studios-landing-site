@@ -1,7 +1,7 @@
 import { ContentArea, PageContainer, Section } from '@/components/layout';
-import { Button, Typography } from '@/components/ui';
+import { Typography } from '@/components/ui';
 import { cn } from '@/lib/utils';
-import { BASE, GUIDE, GUIDES, type GuideSlug } from '../_content/shared';
+import { GUIDE, GUIDES, type GuideSlug } from '../_content/shared';
 
 /** The frame every guide page shares: way back, the guide list, the page, and the next guide. */
 export function GuideShell({
@@ -21,11 +21,6 @@ export function GuideShell({
     <PageContainer>
       <Section className="pb-8 sm:pb-10">
         <ContentArea size="lg">
-          <div className="mb-8">
-            <Button variant="ghost" size="sm" href={`${BASE}/`}>
-              ← Bedrock Workers
-            </Button>
-          </div>
           <Typography variant="eyebrow" className="mb-4 block">
             Bedrock Workers guide
           </Typography>
@@ -100,7 +95,7 @@ export function Part({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-8">
+    <section id={id} className="scroll-mt-24">
       <Typography variant="heading" as="h2" className="mb-4">
         <a href={`#${id}`} className="hover:text-accent-bright">
           {title}

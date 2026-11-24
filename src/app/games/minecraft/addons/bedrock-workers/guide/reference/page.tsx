@@ -1,48 +1,13 @@
 import type { Metadata } from 'next';
 import { Bullets, GuideShell, Part, Sign, Table } from '../../_components/GuideShell';
-import { GUIDE } from '../../_content/shared';
+import { BASE, GUIDE } from '../../_content/shared';
+import { MERCHANTS, WORKERS } from '../../_content/workers';
 
 export const metadata: Metadata = {
   title: 'Bedrock Workers reference',
   description:
     'Every Bedrock Workers job with its kit, pay, workstation and house; every sign; the merchants; the Ledger; levels and wages.',
 };
-
-const BREAD = '1, 1, 2, 2, 3 bread';
-
-/** Kit, pay (Novice to Master), how often it's paid, workstation, house. */
-const jobs: [string, string, string, string, string, string][] = [
-  ['Fisherman', 'Fishing rod + bread', BREAD, 'a trip', 'Barrel', 'Fishing House'],
-  ['Woodcutter', 'Any axe + bread', BREAD, 'a trip', 'Fletching table', 'Log Cabin'],
-  ['Farmer', 'Hoe + raw fish', '2, 2, 4, 4, 6 raw fish', 'a trip', 'Composter', 'Farmhouse'],
-  [
-    'Livestock farmer',
-    'Bucket or shears + wheat',
-    '2, 2, 4, 4, 6 wheat',
-    'a round',
-    'Cauldron',
-    'Cow Barn House',
-  ],
-  ['Baker', 'Bucket of milk + wheat', BREAD, 'kept from each batch', 'Smoker', 'Bakery'],
-  ['Page', 'Book + bread', BREAD, 'a round', 'Lectern', 'Storehouse'],
-  ['Quartermaster', 'Chest + bread', BREAD, 'a round', 'Lectern', 'Storage House'],
-  ['Builder', 'Shovel + bread', BREAD, 'a job', 'Stonecutter', 'Builder’s Yard'],
-  ['Miner', 'Pickaxe + bread', BREAD, 'a trip', 'Stonecutter', 'Miner’s Lodge'],
-  ['Guard', 'Sword + bread', BREAD, 'a shift', 'Grindstone', 'Guard Tower'],
-  ['Doctor', 'Glass bottle + bread', BREAD, 'a visit', 'Brewing stand', 'Clinic'],
-  ['Tavern keeper', 'Barrel + bread', BREAD, 'a day', 'None', 'Tavern'],
-  ['Cook', 'Smoker + bread', '1, 1, 1, 2, 2 bread', 'a meal', 'Smoker', 'Kitchen'],
-  ['Animal handler', 'Lead + bread', BREAD, 'a night', 'Fletching table', 'Kennel'],
-  [
-    'Advisor',
-    'Lectern + bread',
-    '1, 1, 1, 2, 2 bread',
-    'a day',
-    'Lives at the town center',
-    'Town center office',
-  ],
-  ['Stable Master', 'Comes on their own', 'Not paid', '', '', 'Stall by the stable'],
-];
 
 const signs: [React.ReactNode, string, string][] = [
   [
@@ -130,47 +95,27 @@ const signs: [React.ReactNode, string, string][] = [
   ],
 ];
 
-const merchants: [string, React.ReactNode, string, string][] = [
-  ['Smith', <Sign key="s">SMITH</Sign>, '5 happy', 'Iron, tools, armor, an anvil'],
-  ['Mason', <Sign key="s">MASON</Sign>, '5 happy', 'Bricks, glass, lanterns, quartz, sea lanterns'],
-  [
-    'Weaver',
-    <Sign key="s">WEAVER</Sign>,
-    '5 happy',
-    'Wool, beds, carpet, string, leather, saddles',
-  ],
-  [
-    'Gardener',
-    <Sign key="s">GARDENER</Sign>,
-    '5 happy',
-    'Every sapling, seeds, crops, flower pots, honey',
-  ],
-  [
-    'Cave Gardener',
-    <Sign key="s">CAVE GARDENER</Sign>,
-    '5 happy',
-    'Glow berries, moss, azaleas, dripleaf, cave plants',
-  ],
-  [
-    'Stable Master',
-    <Sign key="s">STABLE</Sign>,
-    '5 happy and a stable',
-    'Leads, hay, saddles, horse armor, golden carrots',
-  ],
-  [
-    'Book Trader',
-    <Sign key="s">BOOKS</Sign>,
-    '10 happy',
-    'Books, enchanted books, name tags, bottles o’ enchanting',
-  ],
-  ['Alchemist', <Sign key="s">ALCHEMIST</Sign>, '10 happy', 'Potions and golden apples'],
-  [
-    'Fireworks Maker',
-    <Sign key="s">FIREWORKS</Sign>,
-    '10 happy',
-    'Rockets, firework stars, gunpowder, TNT',
-  ],
-];
+const link = (slug: string, text: string) => (
+  <a className="text-accent-bright hover:underline" href={`${BASE}/workers/#${slug}`}>
+    {text}
+  </a>
+);
+
+const jobs = WORKERS.map((w) => [
+  link(w.slug, w.title),
+  w.kit,
+  w.pay,
+  w.paid,
+  w.workstation,
+  w.house,
+]);
+
+const merchants = MERCHANTS.map((m) => [
+  link(m.slug, m.title),
+  <Sign key="s">{m.sign}</Sign>,
+  m.unlock,
+  m.sells,
+]);
 
 export default function Reference() {
   return (

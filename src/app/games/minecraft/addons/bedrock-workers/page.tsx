@@ -1,11 +1,23 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { ContentArea, PageContainer, Section } from '@/components/layout';
 import { Button, Typography } from '@/components/ui';
 import { InstallCard } from './_components/InstallCard';
 import { Trailer } from './_components/Trailer';
-import { ART, CURSEFORGE_URL, FEEDBACK_EMAIL, GUIDE, GUIDES, PROMISE } from './_content/shared';
+import { cn } from '@/lib/utils';
+import { pixel } from './_content/font';
+import {
+  ART,
+  BASE,
+  CURSEFORGE_URL,
+  FEEDBACK_EMAIL,
+  GUIDE,
+  GUIDES,
+  PROMISE,
+} from './_content/shared';
+import { MERCHANTS, WORKERS } from './_content/workers';
 
 const SUMMARY =
   'Hire villagers who build their own homes, turn fish and wheat into a village economy, and wind down with karaoke after work.';
@@ -30,23 +42,27 @@ export const metadata: Metadata = {
 const steps = [
   {
     n: '1',
+    href: `${GUIDE}/getting-started/#chest`,
     title: 'Craft a Worker’s Chest',
     body: 'A chest and a piece of paper. Only you (and your worker) can open it.',
   },
   {
     n: '2',
+    href: `${GUIDE}/getting-started/#first-hire`,
     title: 'Put a kit in it',
     body: 'A fishing rod and a loaf of bread makes a fisherman. An axe and bread, a woodcutter. Every job has a kit.',
   },
   {
     n: '3',
+    href: `${GUIDE}/getting-started/#first-hire`,
     title: 'Someone shows up',
     body: 'A job seeker walks over, takes the kit, changes into the outfit and gets to work. The haul comes back to the chest.',
   },
   {
     n: '4',
+    href: `${GUIDE}/getting-started/#farmer`,
     title: 'Hire a farmer next',
-    body: 'When your fisherman brings back a catch, put a hoe and two raw fish in a second Worker’s Chest near water to hire a farmer. His wheat is what the baker turns into everyone’s pay.',
+    body: 'When your fisherman brings back a catch, put a hoe and two raw fish in a second Worker’s Chest near water to hire a farmer. Their wheat is what the baker turns into everyone’s pay.',
   },
 ];
 
@@ -97,167 +113,62 @@ const shownMoments = moments.filter((m) =>
   m.shots.every((s) => fs.existsSync(path.join(PUBLIC_ART, `${s.file}.webp`))),
 );
 
-const jobs: { title: string; kit: string; does: string }[] = [
-  {
-    title: 'Fisherman',
-    kit: 'Fishing rod + bread',
-    does: 'Casts at the nearest water and brings home the catch, sometimes treasure.',
-  },
-  {
-    title: 'Woodcutter',
-    kit: 'Axe + bread',
-    does: 'Fells trees, replants every one, and clears land where you put a CLEAR sign.',
-  },
-  {
-    title: 'Farmer',
-    kit: 'Hoe + raw fish',
-    does: 'Tills by the water, grows wheat and whatever seeds you give him.',
-  },
-  {
-    title: 'Livestock Farmer',
-    kit: 'Bucket or shears + wheat',
-    does: 'Milks, shears and breeds the animals in the pen by his barn.',
-  },
-  {
-    title: 'Baker',
-    kit: 'Milk + wheat',
-    does: 'Turns wheat into the bread everyone is paid in, then cakes, pies and cookies.',
-  },
-  {
-    title: 'Page',
-    kit: 'Book + bread',
-    does: 'Runs the storehouse and tops up every Worker’s Chest with pay, tools and building materials.',
-  },
-  {
-    title: 'Quartermaster',
-    kit: 'Chest + bread',
-    does: 'Gathers everything nobody needs and sorts it into labeled chests: wood, food, ore, treasure.',
-  },
-  {
-    title: 'Builder',
-    kit: 'Shovel + bread',
-    does: 'Builds your homestead and the town center, and moves workers’ houses to a MOVE sign.',
-  },
-  {
-    title: 'Miner',
-    kit: 'Pickaxe + bread',
-    does: 'Digs a tunnel from a MINE sign, lights it with your torches, and brings home everything he digs.',
-  },
-  {
-    title: 'Guard',
-    kit: 'Sword + bread',
-    does: 'Patrols by day, watches at night, and comes running when a worker is hurt.',
-  },
-  {
-    title: 'Doctor',
-    kit: 'Glass bottle + bread',
-    does: 'Finds the injured and nurses them back with flowers and honey.',
-  },
-  {
-    title: 'Tavern Keeper',
-    kit: 'Barrel + bread',
-    does: 'Builds the tavern and serves the baker’s cakes and pies. In the evening, everyone comes in.',
-  },
-  {
-    title: 'Cook',
-    kit: 'Smoker + bread',
-    does: 'Lays out breakfast, lunch and dinner at the dining hall. A good meal lifts everyone’s mood.',
-  },
-  {
-    title: 'Animal Handler',
-    kit: 'Lead + bread',
-    does: 'Keeps a pack of wolves and cats, tames a new one each day, and looks after your pets.',
-  },
-  {
-    title: 'Advisor',
-    kit: 'Lectern + bread',
-    does: 'Lives at the town center and tells you each morning what the settlement needs.',
-  },
-  {
-    title: 'Stable Master',
-    kit: 'Comes on his own',
-    does: 'Moves in once there’s a stable, and breeds horses with golden carrots.',
-  },
-];
-
 const features = [
   {
     title: 'They build their own houses',
+    more: { href: `${GUIDE}/growing-your-settlement/#houses`, label: 'How houses work' },
     body: 'Every job has a home: a fishing house by the water, a barn with a hayloft and stable, a bakery, a clinic, a guard tower. Houses grow additions as workers level up.',
     img: 'fishing-house',
     alt: 'A fishing house with a smokehouse',
   },
   {
     title: 'An economy that runs on bread',
+    more: { href: `${GUIDE}/growing-your-settlement/#economy`, label: 'How the economy balances' },
     body: 'The fisher feeds the farmer, the farmer’s wheat goes to the baker, and bread pays everyone. Workers level up from Novice to Master, bring back more, and ask for more.',
     img: 'bakery',
     alt: 'The bakery with its shop front',
   },
   {
     title: 'An evening at the tavern',
+    more: { href: `${BASE}/workers/#tavern-keeper`, label: 'The tavern keeper' },
     body: 'When work ends, workers head to the tavern to eat, chat and sing karaoke. Happy workers stay. Unhappy ones think about leaving.',
     img: 'tavern',
     alt: 'The tavern',
   },
   {
     title: 'Danger, guards and a doctor',
+    more: { href: `${GUIDE}/growing-your-settlement/#safety`, label: 'Guards and the doctor' },
     body: 'Monsters and raiders hunt your workers like any villager. Hurt workers collapse and need care: feed them flowers or honey, or hire a doctor.',
     img: 'guard-tower',
     alt: 'A guard tower with a bell',
   },
   {
     title: 'A homestead and a town',
+    more: { href: `${BASE}/workers/#builder`, label: 'The builder' },
     body: 'Put up a HOMESTEAD sign and your builder builds you a house, then a wing, a second floor and a basement. A TOWN CENTER brings a fountain, a bell and an advisor.',
     img: 'homestead',
     alt: 'The player’s homestead',
   },
 ];
 
-const merchants = [
-  { title: 'Smith', sign: 'SMITH', sells: 'Iron, tools, buckets and armor' },
-  { title: 'Mason', sign: 'MASON', sells: 'Bricks, glass, lanterns and quartz' },
-  { title: 'Weaver', sign: 'WEAVER', sells: 'Wool, beds, carpet, string and leather' },
-  { title: 'Gardener', sign: 'GARDENER', sells: 'Saplings, seeds, crops, flower pots and honey' },
-  {
-    title: 'Cave Gardener',
-    sign: 'CAVE GARDENER',
-    sells: 'Glow berries, moss, azaleas, dripleaf and other cave plants',
-  },
-  {
-    title: 'Stable Master',
-    sign: 'STABLE',
-    sells: 'Leads, hay, saddles, horse armor and golden carrots',
-  },
-  {
-    title: 'Book Trader',
-    sign: 'BOOKS',
-    sells: 'Books, enchanted books and name tags',
-    later: true,
-  },
-  { title: 'Alchemist', sign: 'ALCHEMIST', sells: 'Potions and golden apples', later: true },
-  {
-    title: 'Fireworks Maker',
-    sign: 'FIREWORKS',
-    sells: 'Fireworks, gunpowder and dyes',
-    later: true,
-  },
-];
-
 const materials = [
   {
     who: 'Woodcutter',
+    slug: 'woodcutter',
     sign: 'CLEAR',
-    body: 'Put up a CLEAR sign and he fells every tree in a strip 16 blocks long and 9 wide, then hauls the logs home. A WOOD sign keeps him to one forest, and he replants as he goes.',
+    body: 'Put up a CLEAR sign and they fell every tree in a strip 16 blocks long and 9 wide, then haul the logs home. A WOOD sign keeps them to one forest, and they replant as they go.',
   },
   {
     who: 'Miner',
+    slug: 'miner',
     sign: 'MINE',
-    body: 'Put up a MINE sign and he digs a tunnel 3 wide and 5 tall, sloping down or dead level, lighting it with your torches. Stone, coal and ore all come back to his chest.',
+    body: 'Put up a MINE sign and they dig a tunnel 3 wide and 5 tall, sloping down or dead level, lit with your torches. Stone, coal and ore all come back to their chest.',
   },
   {
     who: 'Quartermaster',
+    slug: 'quartermaster',
     sign: 'STORES',
-    body: 'He collects what nobody needs from every Worker’s Chest and sorts it into labeled chests by his STORES sign: wood, food, building, stone and ore, treasure. He builds more chests as they fill.',
+    body: 'They collect what nobody needs from every Worker’s Chest and sort it into labeled chests by the STORES sign: wood, food, building, stone and ore, treasure. More chests as they fill.',
   },
 ];
 
@@ -273,11 +184,6 @@ export default function BedrockWorkersPage() {
       {/* ── Hero ──────────────────────────────────────────────────────── */}
       <Section className="relative overflow-hidden pt-6 sm:pt-8">
         <ContentArea>
-          <div className="mb-6">
-            <Button variant="ghost" size="sm" href="/">
-              ← 47 Sunset Studios
-            </Button>
-          </div>
           <div className="animate-fade-up mb-8">
             <Typography variant="eyebrow" className="mb-4 block">
               Bedrock Workers · a Minecraft Bedrock add-on
@@ -377,12 +283,31 @@ export default function BedrockWorkersPage() {
           </div>
           <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((s) => (
-              <li key={s.n} className="border-border-subtle bg-surface-1 rounded-xl border p-6">
-                <span className="text-accent mb-4 block font-mono text-sm">{s.n}</span>
-                <Typography variant="heading-sm" as="h3" className="mb-2">
-                  {s.title}
-                </Typography>
-                <Typography variant="body-sm">{s.body}</Typography>
+              <li key={s.n}>
+                <a
+                  href={s.href}
+                  className="group border-border-subtle bg-surface-1 hover:border-accent/50 hover:bg-surface-2 flex h-full flex-col rounded-2xl border p-6 transition-colors"
+                >
+                  <span
+                    aria-hidden="true"
+                    className={cn(
+                      pixel.className,
+                      'text-accent mb-5 block text-6xl leading-none [text-shadow:5px_5px_0_#7c2d12]',
+                    )}
+                  >
+                    {s.n}
+                  </span>
+                  <Typography variant="heading-sm" as="h3" className="mb-2">
+                    <span className="sr-only">Step {s.n}: </span>
+                    {s.title}
+                  </Typography>
+                  <Typography variant="body-sm" className="mb-4">
+                    {s.body}
+                  </Typography>
+                  <span className="text-accent-bright text-body-sm mt-auto font-medium group-hover:underline">
+                    Show me how →
+                  </span>
+                </a>
               </li>
             ))}
           </ol>
@@ -418,7 +343,15 @@ export default function BedrockWorkersPage() {
                   <Typography variant="heading" as="h3" className="mb-4">
                     {f.title}
                   </Typography>
-                  <Typography variant="body-lg">{f.body}</Typography>
+                  <Typography variant="body-lg" className="mb-4">
+                    {f.body}
+                  </Typography>
+                  <a
+                    href={f.more.href}
+                    className="text-accent-bright text-body font-medium hover:underline"
+                  >
+                    {f.more.label} →
+                  </a>
                 </div>
               </div>
             ))}
@@ -460,18 +393,23 @@ export default function BedrockWorkersPage() {
             />
           </div>
           <ul className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {merchants.map((m) => (
-              <li key={m.title} className="border-border-subtle bg-surface-1 rounded-xl border p-5">
-                <div className="mb-1 flex items-baseline justify-between gap-3">
-                  <Typography variant="subheading" as="h3" className="text-text-primary">
-                    {m.title}
-                  </Typography>
-                  {m.later && <span className="text-text-subtle text-caption">10 happy</span>}
-                </div>
-                <span className="text-accent-bright text-caption mb-3 block font-mono">
-                  Sign: {m.sign}
-                </span>
-                <Typography variant="body-sm">{m.sells}</Typography>
+            {MERCHANTS.map((m) => (
+              <li key={m.slug}>
+                <a
+                  href={`${BASE}/workers/#${m.slug}`}
+                  className="border-border-subtle bg-surface-1 hover:border-accent/50 hover:bg-surface-2 block h-full rounded-xl border p-5 transition-colors"
+                >
+                  <div className="mb-1 flex items-baseline justify-between gap-3">
+                    <Typography variant="subheading" as="h3" className="text-text-primary">
+                      {m.title} →
+                    </Typography>
+                    {m.later && <span className="text-text-subtle text-caption">10 happy</span>}
+                  </div>
+                  <span className="text-accent-bright text-caption mb-3 block font-mono">
+                    Sign: {m.sign}
+                  </span>
+                  <Typography variant="body-sm">{m.sells}</Typography>
+                </a>
               </li>
             ))}
           </ul>
@@ -532,14 +470,19 @@ export default function BedrockWorkersPage() {
           </div>
           <ol className="grid gap-4 md:grid-cols-3">
             {materials.map((m) => (
-              <li key={m.who} className="border-border-subtle bg-surface-1 rounded-xl border p-6">
-                <span className="text-accent-bright text-caption mb-3 block font-mono">
-                  Sign: {m.sign}
-                </span>
-                <Typography variant="heading-sm" as="h3" className="mb-2">
-                  {m.who}
-                </Typography>
-                <Typography variant="body-sm">{m.body}</Typography>
+              <li key={m.who}>
+                <a
+                  href={`${BASE}/workers/#${m.slug}`}
+                  className="border-border-subtle bg-surface-1 hover:border-accent/50 hover:bg-surface-2 block h-full rounded-xl border p-6 transition-colors"
+                >
+                  <span className="text-accent-bright text-caption mb-3 block font-mono">
+                    Sign: {m.sign}
+                  </span>
+                  <Typography variant="heading-sm" as="h3" className="mb-2">
+                    {m.who} →
+                  </Typography>
+                  <Typography variant="body-sm">{m.body}</Typography>
+                </a>
               </li>
             ))}
           </ol>
@@ -559,20 +502,25 @@ export default function BedrockWorkersPage() {
               Who you can hire
             </Typography>
             <Typography variant="body" className="mx-auto max-w-prose">
-              The kit is what you put in the Worker’s Chest. After that, every worker is paid in
-              bread.
+              The kit is what you put in the Worker’s Chest. After that, most are paid in bread.
+              Pick one for the details.
             </Typography>
           </div>
           <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {jobs.map((j) => (
-              <li key={j.title} className="border-border-subtle bg-surface-1 rounded-xl border p-5">
-                <Typography variant="subheading" as="h3" className="text-text-primary mb-1">
-                  {j.title}
-                </Typography>
-                <span className="text-accent-bright text-caption mb-3 block font-mono">
-                  {j.kit}
-                </span>
-                <Typography variant="body-sm">{j.does}</Typography>
+            {WORKERS.map((w) => (
+              <li key={w.slug}>
+                <a
+                  href={`${BASE}/workers/#${w.slug}`}
+                  className="border-border-subtle bg-surface-1 hover:border-accent/50 hover:bg-surface-2 block h-full rounded-xl border p-5 transition-colors"
+                >
+                  <Typography variant="subheading" as="h3" className="text-text-primary mb-1">
+                    {w.title} →
+                  </Typography>
+                  <span className="text-accent-bright text-caption mb-3 block font-mono">
+                    {w.kit}
+                  </span>
+                  <Typography variant="body-sm">{w.card}</Typography>
+                </a>
               </li>
             ))}
           </ul>
@@ -643,8 +591,12 @@ export default function BedrockWorkersPage() {
       <footer className="border-border-subtle border-t px-4 py-10 sm:px-6">
         <ContentArea>
           <Typography variant="caption" className="mx-auto block max-w-prose text-center">
-            Bedrock Workers is made by 47 Sunset Studios LLC. Not an official Minecraft product. Not
-            approved by or associated with Mojang or Microsoft.
+            Bedrock Workers is made by{' '}
+            <Link href="/" className="hover:text-text-primary underline">
+              47 Sunset Studios LLC
+            </Link>
+            . Not an official Minecraft product. Not approved by or associated with Mojang or
+            Microsoft.
           </Typography>
         </ContentArea>
       </footer>
