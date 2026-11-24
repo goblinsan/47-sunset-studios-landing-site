@@ -1,27 +1,28 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import type { Metadata } from 'next';
 import { ContentArea, PageContainer, Section } from '@/components/layout';
 import { Button, Typography } from '@/components/ui';
+import { InstallCard } from './_components/InstallCard';
+import { Trailer } from './_components/Trailer';
+import { ART, CURSEFORGE_URL, FEEDBACK_EMAIL, GUIDE, GUIDES, PROMISE } from './_content/shared';
 
-const ART = '/games/minecraft/addons/bedrock-workers';
-
-/** Set once the CurseForge listing is live; until then the page says "coming soon". */
-const CURSEFORGE_URL: string | null = null;
-const FEEDBACK_EMAIL = 'hello@47sunsetstudios.com';
+const SUMMARY =
+  'Hire villagers who build their own homes, turn fish and wheat into a village economy, and wind down with karaoke after work.';
 
 export const metadata: Metadata = {
   title: 'Bedrock Workers — a Minecraft Bedrock add-on',
-  description:
-    'Hire villagers with a Worker’s Chest and watch a settlement run itself: 16 jobs, houses they build themselves, a bread economy, merchants, a tavern, guards and a doctor. No experimental toggles.',
+  description: `${PROMISE} ${SUMMARY}`,
   openGraph: {
     title: 'Bedrock Workers',
-    description:
-      'Hire villagers and watch a settlement run itself. A Minecraft Bedrock add-on: 16 jobs, houses, merchants, a tavern and more.',
+    description: SUMMARY,
     images: [{ url: `${ART}/og.png`, width: 1200, height: 630, alt: 'Bedrock Workers' }],
+    videos: [{ url: `${ART}/trailer.mp4`, width: 1920, height: 1080, type: 'video/mp4' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Bedrock Workers',
-    description: 'Hire villagers and watch a settlement run itself. A Minecraft Bedrock add-on.',
+    description: SUMMARY,
     images: [`${ART}/og.png`],
   },
 };
@@ -42,7 +43,59 @@ const steps = [
     title: 'Someone shows up',
     body: 'A job seeker walks over, takes the kit, changes into the outfit and gets to work. The haul comes back to the chest.',
   },
+  {
+    n: '4',
+    title: 'Hire a farmer next',
+    body: 'When your fisherman brings back a catch, put a hoe and two raw fish in a second Worker’s Chest near water to hire a farmer. His wheat is what the baker turns into everyone’s pay.',
+  },
 ];
+
+/**
+ * In-game screenshots. A moment shows only once all its pictures are in public/, so the page never
+ * has an empty frame. Capture in the game and save as .webp, 1600 wide.
+ */
+const moments: {
+  title: string;
+  body: string;
+  shots: { file: string; alt: string; label?: string }[];
+}[] = [
+  {
+    title: 'Stock a chest',
+    body: 'A fishing rod and a loaf of bread in a Worker’s Chest. That is the whole hiring screen.',
+    shots: [
+      {
+        file: 'moment-first-hire',
+        alt: 'A Worker’s Chest holding a fishing rod and a loaf of bread',
+      },
+    ],
+  },
+  {
+    title: 'Watch them build',
+    body: 'Briar the cook asks for a serving counter. Put the materials in Briar’s chest and the kitchen grows one, block by block.',
+    shots: [
+      {
+        file: 'moment-kitchen-before',
+        alt: 'The cook’s kitchen before the serving counter',
+        label: 'Before',
+      },
+      {
+        file: 'moment-kitchen-after',
+        alt: 'The kitchen with its new serving counter',
+        label: 'After',
+      },
+    ],
+  },
+  {
+    title: 'Know what they need',
+    body: 'The Worker’s Ledger shows what the settlement holds against what it wants, what was made and used today, and who is working or resting.',
+    shots: [{ file: 'moment-ledger', alt: 'The Worker’s Ledger Economy screen' }],
+  },
+];
+
+const PUBLIC_ART = path.join(process.cwd(), 'public', ART);
+const shownMoments = moments.filter((m) =>
+  m.shots.every((s) => fs.existsSync(path.join(PUBLIC_ART, `${s.file}.webp`))),
+);
 
 const jobs: { title: string; kit: string; does: string }[] = [
   {
@@ -218,64 +271,98 @@ export default function BedrockWorkersPage() {
   return (
     <PageContainer>
       {/* ── Hero ──────────────────────────────────────────────────────── */}
-      <Section className="relative overflow-hidden">
+      <Section className="relative overflow-hidden pt-6 sm:pt-8">
         <ContentArea>
-          <div className="mb-10">
+          <div className="mb-6">
             <Button variant="ghost" size="sm" href="/">
               ← 47 Sunset Studios
             </Button>
           </div>
-          <div className="grid items-center gap-10 md:grid-cols-[1.1fr_1fr]">
-            <div className="animate-fade-up">
-              <Typography variant="eyebrow" className="mb-5 block">
-                Minecraft Bedrock add-on
-              </Typography>
-              <Typography variant="display" as="h1" className="mb-6">
-                Bedrock Workers
-              </Typography>
-              <Typography variant="body-lg" className="mb-8 max-w-prose">
-                Hire villagers to fish, farm, bake, build and guard. They build their own houses,
-                get paid in bread, head to the tavern at night, and turn your base into a settlement
-                that runs itself.
-              </Typography>
-              <div className="flex flex-wrap items-center gap-3">
-                {CURSEFORGE_URL ? (
-                  <Button variant="primary" size="lg" href={CURSEFORGE_URL}>
-                    Get it on CurseForge
-                  </Button>
-                ) : (
-                  <span className="border-accent/40 text-accent-bright text-body-sm inline-flex h-12 items-center rounded-lg border px-5 font-medium">
-                    Coming soon to CurseForge
-                  </span>
-                )}
-                <Button variant="secondary" size="lg" href="#feedback">
+          <div className="animate-fade-up mb-8">
+            <Typography variant="eyebrow" className="mb-4 block">
+              Bedrock Workers · a Minecraft Bedrock add-on
+            </Typography>
+            <Typography variant="heading-xl" as="h1" className="mb-4 max-w-4xl">
+              {PROMISE}
+            </Typography>
+            <Typography variant="body-lg" className="max-w-prose">
+              Hire villagers to fish, farm, bake, build and guard. They put up their own houses, get
+              paid in bread, and head to the tavern for karaoke when the work is done.
+            </Typography>
+          </div>
+          <Trailer />
+          <div className="mt-8 grid gap-6 md:grid-cols-[1fr_1.15fr] md:items-start">
+            <div className="flex flex-col items-start gap-3">
+              {CURSEFORGE_URL ? (
+                <Button variant="primary" size="lg" href={CURSEFORGE_URL}>
+                  Download on CurseForge
+                </Button>
+              ) : (
+                <span className="border-accent/40 text-accent-bright text-body inline-flex h-12 items-center rounded-lg border px-5 font-medium">
+                  Coming soon to CurseForge
+                </span>
+              )}
+              <div className="flex flex-wrap gap-3">
+                <Button variant="secondary" size="md" href={`${GUIDE}/getting-started/`}>
+                  Getting started guide
+                </Button>
+                <Button variant="ghost" size="md" href="#feedback">
                   Tell us what you think
                 </Button>
               </div>
-              <Typography variant="caption" className="mt-6 block">
-                Bedrock 1.26.60 or later · Xbox, PC, tablet, phone and servers · No experimental
-                toggles
-              </Typography>
             </div>
-            <div className="relative">
-              <div
-                aria-hidden="true"
-                className="bg-accent/10 absolute inset-6 -z-10 rounded-full blur-3xl"
-              />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`${ART}/logo.webp`}
-                alt="Bedrock Workers: villagers at work in a small village"
-                width={640}
-                height={640}
-                className="border-border-subtle w-full rounded-2xl border shadow-2xl"
-              />
-            </div>
+            <InstallCard />
           </div>
         </ContentArea>
       </Section>
 
       <SectionDivider />
+
+      {/* ── In-game moments ───────────────────────────────────────────── */}
+      {shownMoments.length > 0 && (
+        <Section id="moments" animate>
+          <ContentArea>
+            <div className="mb-12 text-center">
+              <Typography variant="eyebrow" className="mb-4 block">
+                In the game
+              </Typography>
+              <Typography variant="heading-lg" as="h2">
+                What you do, what they build, how you keep track
+              </Typography>
+            </div>
+            <div className="grid gap-8 lg:grid-cols-3">
+              {shownMoments.map((m) => (
+                <figure key={m.title} className="flex flex-col gap-4">
+                  <div className={m.shots.length > 1 ? 'grid grid-cols-2 gap-2' : ''}>
+                    {m.shots.map((s) => (
+                      <div key={s.file} className="relative">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={`${ART}/${s.file}.webp`}
+                          alt={s.alt}
+                          loading="lazy"
+                          className="border-border-subtle aspect-video w-full rounded-xl border object-cover"
+                        />
+                        {s.label && (
+                          <span className="text-caption absolute top-2 left-2 rounded bg-black/70 px-2 py-0.5 font-medium text-white">
+                            {s.label}
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                  <figcaption>
+                    <Typography variant="heading-sm" as="h3" className="mb-2">
+                      {m.title}
+                    </Typography>
+                    <Typography variant="body-sm">{m.body}</Typography>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </ContentArea>
+        </Section>
+      )}
 
       {/* ── How it works ──────────────────────────────────────────────── */}
       <Section id="how" animate>
@@ -288,7 +375,7 @@ export default function BedrockWorkersPage() {
               A chest, a kit, a worker
             </Typography>
           </div>
-          <ol className="grid gap-4 md:grid-cols-3">
+          <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((s) => (
               <li key={s.n} className="border-border-subtle bg-surface-1 rounded-xl border p-6">
                 <span className="text-accent mb-4 block font-mono text-sm">{s.n}</span>
@@ -486,6 +573,41 @@ export default function BedrockWorkersPage() {
                   {j.kit}
                 </span>
                 <Typography variant="body-sm">{j.does}</Typography>
+              </li>
+            ))}
+          </ul>
+        </ContentArea>
+      </Section>
+
+      <SectionDivider />
+
+      {/* ── Guides ────────────────────────────────────────────────────── */}
+      <Section id="guides" animate>
+        <ContentArea>
+          <div className="mb-12 text-center">
+            <Typography variant="eyebrow" className="mb-4 block">
+              Guides
+            </Typography>
+            <Typography variant="heading-lg" as="h2" className="mb-4">
+              Everything it can do
+            </Typography>
+            <Typography variant="body" className="mx-auto max-w-prose">
+              Start with the first hire, then grow from there. The reference lists every job and
+              every sign.
+            </Typography>
+          </div>
+          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+            {GUIDES.map((g) => (
+              <li key={g.slug}>
+                <a
+                  href={`${GUIDE}/${g.slug}/`}
+                  className="border-border-subtle bg-surface-1 hover:border-accent/50 hover:bg-surface-2 block h-full rounded-xl border p-5 transition-colors"
+                >
+                  <Typography variant="subheading" as="h3" className="text-text-primary mb-2">
+                    {g.title} →
+                  </Typography>
+                  <Typography variant="body-sm">{g.blurb}</Typography>
+                </a>
               </li>
             ))}
           </ul>
