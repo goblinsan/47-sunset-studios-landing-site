@@ -4,7 +4,7 @@ export const GUIDE = `${BASE}/guide`;
 
 /** Set once the release file is publicly downloadable; until then the page says "coming soon". */
 export const CURSEFORGE_URL: string | null = null;
-export const FEEDBACK_EMAIL = 'hello@47sunsetstudios.com';
+export const FEEDBACK_EMAIL = 'feedback@47sunsetstudios.com';
 
 /** Both pack manifests declare this as min_engine_version. */
 export const MIN_VERSION = '1.26.60';
