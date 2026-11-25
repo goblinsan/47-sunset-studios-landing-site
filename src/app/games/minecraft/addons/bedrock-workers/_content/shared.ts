@@ -3,7 +3,8 @@ export const BASE = '/games/minecraft/addons/bedrock-workers';
 export const GUIDE = `${BASE}/guide`;
 
 /** Set once the release file is publicly downloadable; until then the page says "coming soon". */
-export const CURSEFORGE_URL: string | null = null;
+export const CURSEFORGE_URL: string | null =
+  'https://www.curseforge.com/minecraft-bedrock/addons/bedrock-workers';
 /** The trailer on YouTube. The site plays its own copy; this adds a Watch on YouTube link when set. */
 export const YOUTUBE_URL: string | null = 'https://youtu.be/0CL23IcMWvc';
 export const FEEDBACK_EMAIL = 'feedback@47sunsetstudios.com';
